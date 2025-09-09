@@ -10,7 +10,7 @@ public class Rectangle {
 
     public Rectangle() {
         length = 1;
-        width = 1;
+        width = 5;
     }
 
     // getters
@@ -33,6 +33,24 @@ public class Rectangle {
 
     // methods
     public String toString() {
-        return ("This is a rectangle" + (length * width));
+        return ("This is a rectangle. Its area is " + (length * width));
     }
+    public boolean equals(Rectangle other) {
+        return length == other.length && width == other.width;
+    }
+
+    public int calculateArea() {
+        return length * width;
+    }
+
+    public int calculatePerimeter() {
+        return 2 * width + 2 * length;
+    }
+
+    public double calculateDiagonal() {
+        return Math.sqrt((width * width) + (length * length));
+    }
+    // getters
+
+    // setters
 }
