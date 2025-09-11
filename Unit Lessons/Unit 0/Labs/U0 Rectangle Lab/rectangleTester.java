@@ -1,4 +1,4 @@
-public class rectangleTester {
+public class RectangleTester {
     public static void main(String[] args) {
         Rectangle rect = new Rectangle();
         Rectangle rect2 = new Rectangle();

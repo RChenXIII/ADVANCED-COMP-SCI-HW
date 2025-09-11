@@ -35,6 +35,7 @@ public class Rectangle {
     public String toString() {
         return ("This is a rectangle. Its area is " + (length * width));
     }
+
     public boolean equals(Rectangle other) {
         return length == other.length && width == other.width;
     }
