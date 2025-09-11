@@ -10,10 +10,10 @@ public class RectangleTester {
 
         System.out.println(rect.equals(rect2));
 
-        System.out.println(rect.calculateArea());
+        System.out.println("The area of the rectangle is " + rect.calculateArea());
 
-        System.out.println(rect.calculatePerimeter());
+        System.out.println("The perimeter of the rectangle is " + rect.calculatePerimeter());
 
-        System.out.println(rect.calculateDiagonal());
+        System.out.println("The diagonal of the rectangle is " + rect.calculateDiagonal());
     }
 }

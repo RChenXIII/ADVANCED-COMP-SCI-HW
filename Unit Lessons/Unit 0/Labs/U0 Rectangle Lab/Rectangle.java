@@ -51,7 +51,4 @@ public class Rectangle {
     public double calculateDiagonal() {
         return Math.sqrt((width * width) + (length * length));
     }
-    // getters
-
-    // setters
 }
