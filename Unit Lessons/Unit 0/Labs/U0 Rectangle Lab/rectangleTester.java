@@ -8,7 +8,7 @@ public class RectangleTester {
 
         System.out.println(rect.toString());
 
-        System.out.println(rect.equals(rect2));
+        System.out.println("Are the rectangles the same? " + rect.equals(rect2));
 
         System.out.println("The area of the rectangle is " + rect.calculateArea());
 
