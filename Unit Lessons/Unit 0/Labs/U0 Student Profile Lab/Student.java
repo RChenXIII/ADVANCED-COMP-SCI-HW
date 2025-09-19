@@ -12,7 +12,7 @@ public class Student {
 
     public Student(String name) {
         this.name = name;
-        this.grade = grade;
+        this.grade = 10;
         this.id = generateId();
     }
 
