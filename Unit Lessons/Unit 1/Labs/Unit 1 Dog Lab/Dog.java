@@ -12,7 +12,7 @@ public class Dog {
         this.ownerName = ownerName;
         this.age = age;
         this.dogId = dogId;
-        this.dogChar = generateDogChar();
+        this.dogChar = Dog.generateDogChar(this.dogId);
         this.dogTag = generateDogTag();
         this.stillInFacility = false;
     }
@@ -22,7 +22,7 @@ public class Dog {
         this.ownerName = "Matthew";
         this.age = 2;
         this.dogId = 123;
-        this.dogChar = generateDogChar();
+        this.dogChar = Dog.generateDogChar(this.dogId);
         this.dogTag = generateDogTag();
         this.stillInFacility = true;
     }
@@ -84,12 +84,10 @@ public class Dog {
     }
 
     public String toString() {
-            return (name + " is a good dog. They are " + age + 
-            " years old and belong to " + ownerName
-                    + ". They are currently in our facility: " + stillInFacility + 
-                    " For employee use only: DogTag is "
-                    + dogTag);
-    
+        return (name + " is a good dog. They are " + age + " years old and belong to " + ownerName
+                + ". They are currently in our facility: " + stillInFacility
+                + " For employee use only: DogTag is " + dogTag);
+
 
 
     }
@@ -106,11 +104,15 @@ public class Dog {
     }
 
     public String generateDogTag() {
-        return("" + dogId + dogChar);
+        return ("" + dogId + dogChar);
     }
 
-    public char generateDogChar() {
+    public static char generateDogChar(int dogId) {
         return (char) ('F' + this.dogId % 10 + (this.dogId / 10) % 10 + this.dogId / 100 % 10);
     }
+
+    // day 2
+
+
 }
 
