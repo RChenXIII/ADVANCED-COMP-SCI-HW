@@ -14,7 +14,7 @@ public class Dog {
         this.dogId = dogId;
         this.dogChar = generateDogChar();
         this.dogTag = generateDogTag();
-        this.stillInFacility = true;
+        this.stillInFacility = false;
     }
 
     public Dog() {
@@ -84,16 +84,12 @@ public class Dog {
     }
 
     public String toString() {
-        if (stillInFacility) {
-            return (name + "is a good dog. They are " + age + "years old and belong to " + ownerName
-                    + ". They are currently in our facility. " + "For employee use only: DogTag is "
+            return (name + " is a good dog. They are " + age + 
+            " years old and belong to " + ownerName
+                    + ". They are currently in our facility: " + stillInFacility + 
+                    " For employee use only: DogTag is "
                     + dogTag);
-        }
-        if (!stillInFacility) {
-            return (name + "is a good dog. They are " + age + "years old and belong to " + ownerName
-                    + ". They are currently not in our facility. "
-                    + "For employee use only: DogTag is " + dogTag);
-        }
+    
 
 
     }
@@ -110,7 +106,11 @@ public class Dog {
     }
 
     public String generateDogTag() {
-        return "" + this.dogId % 10 + (this.dogId / 10) % 10 + this.dogId / 100;
+        return("" + dogId + dogChar);
+    }
+
+    public char generateDogChar() {
+        return (char) ('F' + this.dogId % 10 + (this.dogId / 10) % 10 + this.dogId / 100 % 10);
     }
 }
 
