@@ -84,14 +84,15 @@ public class Dog {
     }
 
     public String toString() {
-        String firstPart = (name + " is a good dog. They are " + age + " years old and belong to "
-                + ownerName + ".");
-        String secondPart = ("For employee use only: DogTag is " + dogTag + dogChar);
         if (stillInFacility) {
-            return (firstPart + " They are currently in our facility. " + secondPart);
+            return (name + "is a good dog. They are " + age + "years old and belong to " + ownerName
+                    + ". They are currently in our facility. " + "For employee use only: DogTag is "
+                    + dogTag);
         }
         if (!stillInFacility) {
-            return (firstPart + " They are not currently in our facility. " + secondPart);
+            return (name + "is a good dog. They are " + age + "years old and belong to " + ownerName
+                    + ". They are currently not in our facility. "
+                    + "For employee use only: DogTag is " + dogTag);
         }
 
 
