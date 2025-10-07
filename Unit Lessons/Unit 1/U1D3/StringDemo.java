@@ -14,12 +14,12 @@ public class StringDemo {
         System.out.println(fullName == fullName3);
         System.out.println(fullName.equals(fullName3));
 
-        // charAt( -> returns the char value at index 
+        // charAt( -> returns the char value at index
         // Daniel Freidman
         System.out.println(fullName.charAt(3));
         // indexOf() -> returns the char value at index
         // Daniel Freidman
-        
+
         System.out.println(fullName.indexOf("n"));
 
         // Daniel A Freidman
@@ -27,19 +27,20 @@ public class StringDemo {
 
 
         int firstSpace = fullName2.indexOf(" "); // finds first space
-        String middleLastName = fullName2.substring(firstSpace); // creates a substring starting at the first space to the end
-        
+        String middleLastName = fullName2.substring(firstSpace); // creates a substring starting at
+                                                                 // the first space to the end
+
         // A Friedman
         System.out.println(middleLastName.indexOf("n")); // find index of n
 
 
-        String middleName = fullName2.substring(4,13);
+        String middleName = fullName2.substring(4, 13);
 
 
         System.out.println(middleName.indexOf("z"));
 
         String string1 = "abc";
-        
+
         String string2 = "zzz";
 
         System.out.println(string1.compareTo(string2));

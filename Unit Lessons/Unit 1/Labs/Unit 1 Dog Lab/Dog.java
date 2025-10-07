@@ -7,7 +7,7 @@ public class Dog {
     private String dogTag;
     private boolean stillInFacility;
 
-    public Dog(String name, String ownerName, int age, int dogId) {
+    public Dog(String name, String ownerName, int age, int dogId, boolean stillInFacility) {
         this.name = name;
         this.ownerName = ownerName;
         this.age = age;
@@ -51,7 +51,7 @@ public class Dog {
         return dogTag;
     }
 
-    public boolean getIsStillInFacility() {
+    public boolean isStillInFacility() {
         return stillInFacility;
     }
 
@@ -86,7 +86,7 @@ public class Dog {
     public String toString() {
         return (name + " is a good dog. They are " + age + " years old and belong to " + ownerName
                 + ". They are currently in our facility: " + stillInFacility
-                + " For employee use only: DogTag is " + dogTag);
+                + ". For employee use only: DogTag is " + dogTag + ".");
 
 
 
@@ -112,10 +112,17 @@ public class Dog {
     }
 
     // day 2
-    public static Strig pickup(Dog dog, String ownerName) {
-        if (dog.stillInFacility() && dog.getOwnerName().equals(ownerName)) {
-            return "Dog picked up successfully.";
+    public static String pickup(Dog dog, String personName) {
+        if (dog.ownerName.equals(personName)) {
+            return "Dog has been picked up successfully.";
+        } else {
+            return "Dog cannot leave. This is not their owner.";
         }
+    }
+
+    public static void checkIn(Dog dog, String personName) {
+        dog.setStillInFacility(true);
+        dog.setOwnerName(personName);
     }
 
 }
