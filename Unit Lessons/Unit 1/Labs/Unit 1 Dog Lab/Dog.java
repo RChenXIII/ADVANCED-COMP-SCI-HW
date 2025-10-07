@@ -108,11 +108,15 @@ public class Dog {
     }
 
     public static char generateDogChar(int dogId) {
-        return (char) ('F' + this.dogId % 10 + (this.dogId / 10) % 10 + this.dogId / 100 % 10);
+        return (char) ('F' + dogId % 10 + (dogId / 10) % 10 + dogId / 100 % 10);
     }
 
     // day 2
-
+    public static Strig pickup(Dog dog, String ownerName) {
+        if (dog.stillInFacility() && dog.getOwnerName().equals(ownerName)) {
+            return "Dog picked up successfully.";
+        }
+    }
 
 }
 
