@@ -11,19 +11,19 @@ public class Dog {
         this.name = name;
         this.ownerName = ownerName;
         this.age = age;
-        this.dogId = dogId;
-        this.dogChar = Dog.generateDogChar(this.dogId);
-        this.dogTag = generateDogTag();
-        this.stillInFacility = false;
+        this.dogId = PawesomeUtils.validateDogId(dogId);
+        this.dogChar = PawesomeUtils.generateDogChar(this.dogId);
+        this.dogTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
+        this.stillInFacility = stillInFacility;
     }
 
     public Dog() {
         this.name = "Daniel";
         this.ownerName = "Matthew";
         this.age = 2;
-        this.dogId = 123;
-        this.dogChar = Dog.generateDogChar(this.dogId);
-        this.dogTag = generateDogTag();
+        this.dogId = PawesomeUtils.validateDogId(123);
+        this.dogChar = PawesomeUtils.generateDogChar(this.dogId);
+        this.dogTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
         this.stillInFacility = true;
     }
 
@@ -68,11 +68,18 @@ public class Dog {
     }
 
     public void setDogId(int dogId) {
-        this.dogId = dogId;
+        this.dogId = PawesomeUtils.validateDogId(dogId);
+        char newChar = PawesomeUtils.generateDogChar(this.dogId);
+        setDogChar(newChar);
+        
+        String newTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
+        setDogTag(newTag);
     }
 
     public void setDogChar(char dogChar) {
         this.dogChar = dogChar;
+        String newTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
+        setDogTag(newTag);
     }
 
     public void setDogTag(String dogTag) {
@@ -87,13 +94,9 @@ public class Dog {
         return (name + " is a good dog. They are " + age + " years old and belong to " + ownerName
                 + ". They are currently in our facility: " + stillInFacility
                 + ". For employee use only: DogTag is " + dogTag + ".");
-
-
-
     }
 
     public boolean equals(Dog other) {
-
         boolean partA = this.name == other.name && this.ownerName == other.ownerName
                 && this.age == other.age && this.dogId == other.dogId;
 
@@ -102,28 +105,4 @@ public class Dog {
 
         return (partA && partB);
     }
-
-    public String generateDogTag() {
-        return ("" + dogId + dogChar);
-    }
-
-    public static char generateDogChar(int dogId) {
-        return (char) ('F' + dogId % 10 + (dogId / 10) % 10 + dogId / 100 % 10);
-    }
-
-    // day 2
-    public static String pickup(Dog dog, String personName) {
-        if (dog.ownerName.equals(personName)) {
-            return "Dog has been picked up successfully.";
-        } else {
-            return "Dog cannot leave. This is not their owner.";
-        }
-    }
-
-    public static void checkIn(Dog dog, String personName) {
-        dog.setStillInFacility(true);
-        dog.setOwnerName(personName);
-    }
-
 }
-
