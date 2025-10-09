@@ -1,4 +1,5 @@
 public class Dog {
+    // Instance variables
     private String name;
     private String ownerName;
     private int age;
@@ -7,6 +8,7 @@ public class Dog {
     private String dogTag;
     private boolean stillInFacility;
 
+    // Constructors
     public Dog(String name, String ownerName, int age, int dogId, boolean stillInFacility) {
         this.name = name;
         this.ownerName = ownerName;
@@ -27,6 +29,7 @@ public class Dog {
         this.stillInFacility = true;
     }
 
+    // Getters
     public String getName() {
         return name;
     }
@@ -55,6 +58,7 @@ public class Dog {
         return stillInFacility;
     }
 
+    // Setters
     public void setName(String name) {
         this.name = name;
     }
@@ -71,7 +75,7 @@ public class Dog {
         this.dogId = PawesomeUtils.validateDogId(dogId);
         char newChar = PawesomeUtils.generateDogChar(this.dogId);
         setDogChar(newChar);
-        
+
         String newTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
         setDogTag(newTag);
     }
@@ -90,6 +94,7 @@ public class Dog {
         this.stillInFacility = stillInFacility;
     }
 
+    // methods
     public String toString() {
         return (name + " is a good dog. They are " + age + " years old and belong to " + ownerName
                 + ". They are currently in our facility: " + stillInFacility
