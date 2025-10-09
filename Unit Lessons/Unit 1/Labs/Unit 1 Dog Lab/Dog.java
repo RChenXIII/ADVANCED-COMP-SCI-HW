@@ -9,14 +9,14 @@ public class Dog {
     private boolean stillInFacility;
 
     // Constructors
-    public Dog(String name, String ownerName, int age, int dogId, boolean stillInFacility) {
+    public Dog(String name, String ownerName, int age, int dogId) {
         this.name = name;
         this.ownerName = ownerName;
         this.age = age;
         this.dogId = PawesomeUtils.validateDogId(dogId);
         this.dogChar = PawesomeUtils.generateDogChar(this.dogId);
         this.dogTag = PawesomeUtils.generateDogTag(this.dogId, this.dogChar);
-        this.stillInFacility = stillInFacility;
+        this.stillInFacility = true;
     }
 
     public Dog() {
