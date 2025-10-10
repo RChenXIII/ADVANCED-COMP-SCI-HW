@@ -15,6 +15,9 @@ public class DogTester {
         System.out.println(PawesomeUtils.generateDogTag(dog1.getDogId(), dog1.getDogChar()));
         System.out.println(PawesomeUtils.generateDogTag(dog2.getDogId(), dog2.getDogChar()));
 
+
+
+
         System.out.println("dog1 equals dog2: " + dog1.equals(dog2));
         System.out.println(dog1.toString());
         System.out.println(dog2.toString());

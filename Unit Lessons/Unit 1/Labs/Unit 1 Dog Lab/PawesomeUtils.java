@@ -5,10 +5,8 @@ public class PawesomeUtils {
 
 
     public static char generateDogChar(int dogId) {
-        int d1 = (int) (dogId / 100);
-        int d2 = (int) (dogId - d1) / 10;
-        int d3 = (int) (dogId - (d1 + d2));
-        return (char) ('F' + ((d1 + d2 + d3) % 10));
+        int digitSum = (dogId % 10) + ((dogId / 10) % 10) + ((dogId / 100) % 10);
+        return (char) ('F' + (digitSum % 10));
     }
 
 
