@@ -1,7 +1,7 @@
 public class DogTester {
     public static void main(String[] args) {
         System.out.println("=== Original Tests ===");
-        Dog dog1 = new Dog("Justin", "Daniel", 5, 456);
+        Dog dog1 = new Dog("Daniel", "Matthew", 2, 123);
         Dog dog2 = new Dog();
         Dog dog3 = new Dog("Owen", "Morgan", 7, 693);
 

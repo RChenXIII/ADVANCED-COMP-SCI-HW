@@ -102,10 +102,10 @@ public class Dog {
     }
 
     public boolean equals(Dog other) {
-        boolean partA = this.name == other.name && this.ownerName == other.ownerName
+        boolean partA = this.name.equals(other.name) && this.ownerName.equals(other.ownerName)
                 && this.age == other.age && this.dogId == other.dogId;
 
-        boolean partB = this.dogChar == other.dogChar && this.dogTag == other.dogTag
+        boolean partB = this.dogChar == other.dogChar && this.dogTag.equals(other.dogTag)
                 && this.stillInFacility == other.stillInFacility;
 
         return (partA && partB);
