@@ -4,7 +4,7 @@ public class TriangleLoops {
         if (numberOfRows <= 0) {
             return "";
         }
-        
+
         String result = "";
         for (int i = 1; i <= numberOfRows; i++) {
             for (int j = 0; j < i; j++) {
@@ -19,7 +19,7 @@ public class TriangleLoops {
         if (numberOfRows <= 0) {
             return "";
         }
-        
+
         String result = "";
         for (int i = numberOfRows; i >= 1; i--) {
             for (int j = 0; j < i; j++) {
@@ -29,13 +29,13 @@ public class TriangleLoops {
         }
         return result;
     }
-    
+
 
     public static String createNumbersTriangle(int numberOfRows) {
         if (numberOfRows <= 0) {
             return "";
         }
-        
+
         String result = "";
         for (int i = 1; i <= numberOfRows; i++) {
             for (int j = 0; j < i; j++) {
@@ -55,20 +55,20 @@ public class TriangleLoops {
         if (numberOfRows <= 0) {
             return "";
         }
-        
+
         String result = "";
-        
+
         for (int i = 1; i <= numberOfRows; i++) {
             for (int j = 0; j < numberOfRows - i; j++) {
                 result += " ";
             }
 
             for (int j = 0; j < i; j++) {
-                result += (char)('A' + j);
+                result += (char) ('A' + j);
             }
 
             for (int j = i - 2; j >= 0; j--) {
-                result += (char)('A' + j);
+                result += (char) ('A' + j);
             }
 
             result += "\n";
