@@ -17,5 +17,7 @@ public class Unit1ExercisesTester {
         System.out.println(Unit1Exercises.stringEnds("Chocolate", 2));
         
         System.out.println(Unit1Exercises.hasBad("badxxx"));
+
+        System.out.println(Unit1Exercises.countVowels("hell"));
     }
 }

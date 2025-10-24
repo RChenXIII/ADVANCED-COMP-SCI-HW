@@ -59,7 +59,7 @@ public class Unit1Exercises {
      * comboString("aaa", "b") -> "baaab"
      */
     public static String comboString(String a, String b) {
-        if (a.length() < b.length()) {
+        if (a.length() <= b.length()) {
             return a + b + a;
         }
         if (a.length() > b.length()) {
@@ -93,7 +93,8 @@ public class Unit1Exercises {
      * middleThree("solving") -> "lvi"
      */
     public static String middleThree(String str) {
-        return "";
+        int middle = str.length() / 2;
+        return str.substring(middle - 1, middle + 2);
     }
 
 
@@ -108,6 +109,9 @@ public class Unit1Exercises {
      * ""
      */
     public static String withoutEnd2(String str) {
+        if (str.length() <= 2) {
+            return "";
+        }
         return str.substring(1, str.length() - 1);
     }
 
@@ -125,10 +129,7 @@ public class Unit1Exercises {
         if (str.length() < n) {
             return "String too short.";
         }
-        if (str.length() > n) {
-            return str.substring(0, n) + str.substring(str.length() - n, str.length());
-        }
-        return "";
+        return str.substring(0, n) + str.substring(str.length() - n, str.length());
     }
 
     // method: hasBad
@@ -140,19 +141,17 @@ public class Unit1Exercises {
      * Tester examples: hasBad("badxx") -> true hasBad("xbadxx") -> true hasBad("xxbadxx") -> false
      */
     public static boolean hasBad(String str) {
-        String yesBad = str.substring(0, 3);
-        String maybeBad = str.substring(1, 4);
-
-        if (yesBad.compareTo("bad") == 0) {
+        // Check if "bad" starts at index 0
+        if (str.length() >= 3 && str.substring(0, 3).equals("bad")) {
             return true;
         }
-        if (maybeBad.compareTo("bad") == 0) {
+        // Check if "bad" starts at index 1
+        if (str.length() >= 4 && str.substring(1, 4).equals("bad")) {
             return true;
-        } else {
-            return false;
         }
-
+        return false;
     }
+
 
     // method: countVowels
     /*
@@ -162,8 +161,18 @@ public class Unit1Exercises {
     /*
      * Tester examples: countVowels("Hello") -> 2 countVowels("abc") -> 1 countVowels("") -> 0
      */
-    public static int countVowels(String input) {
-        return 0;
+    public static int countVowels(String str) {
+        int count = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E'
+                    || c == 'I' || c == 'O' || c == 'U') {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     // method: countCode
@@ -176,7 +185,15 @@ public class Unit1Exercises {
      * countCode("cozexxcope") -> 2
      */
     public static int countCode(String str) {
-        return 0;
+        int count = 0;
+
+        for (int i = 0; i <= str.length() - 4; i++) {
+            if (str.charAt(i) == 'c' && str.charAt(i + 1) == 'o' && str.charAt(i + 3) == 'e') {
+                count++;
+            }
+        }
+
+        return count;
     }
 
 }
