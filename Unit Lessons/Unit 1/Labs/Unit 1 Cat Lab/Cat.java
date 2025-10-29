@@ -7,23 +7,22 @@ public class Cat {
     public boolean isHungry;
 
     public Cat(String name, String ownerName, int moodLevel, String catId) {
-        this.name = name;
-        this.ownerName = ownerName;
-        this.moodLevel = PurrfectUtils.vaildateMoodLevel(moodLevel);
-        this.catId = PurrfectUtils.vaildateCatId(catId);
-        this.catChar = PurrfectUtils.generateCatChar(catChar);
-        this.isHungry = true;
-    }
- 
-    public Cat() {
-        this.name = "Matthew";
-        this.ownerName = "Justin";
-        this.moodLevel = 5;
-        this.catId = "1849";
-        this.catChar = PurrfectUtils.generateCatChar(catChar);
-        this.isHungry = true;
+    this.name = name;
+    this.ownerName = ownerName;
+    this.moodLevel = PurrfectUtils.validateMoodLevel(moodLevel);
+    this.catId = PurrfectUtils.validateCatId(catId);
+    this.catChar = PurrfectUtils.generateCatChar(this.catId);  // Pass catId, not catChar
+    this.isHungry = true;
+}
 
-    }
+public Cat() {
+    this.name = "Matthew";
+    this.ownerName = "Justin";
+    this.moodLevel = 5;
+    this.catId = "1849";
+    this.catChar = PurrfectUtils.generateCatChar(this.catId); 
+    this.isHungry = true;
+}
 
     public String getName() {
         return name;
