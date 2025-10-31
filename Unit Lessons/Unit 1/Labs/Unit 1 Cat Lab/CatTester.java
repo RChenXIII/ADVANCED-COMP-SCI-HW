@@ -1,14 +1,14 @@
 public class CatTester {
     public static void main(String[] args) {
         // Step 1: Create a new Cat object
-        Cat cookie = new Cat("Cookie", "Sarah", 8, "1435");
+        Cat cookie = new Cat("Cookie", "Sarah", 8, "1432");
 
         // Step 2: Use setters to update values
         System.out.println("=== Testing Setters ===");
         cookie.setName("Cookie");
         cookie.setOwnerName("Sarah");
         cookie.setMoodLevel(8);
-        cookie.setCatId("1435");
+        cookie.setCatId("1432");
         cookie.isHungry = false;
         System.out.println("Setters applied successfully!\n");
 
