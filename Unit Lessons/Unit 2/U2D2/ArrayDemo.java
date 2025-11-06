@@ -6,11 +6,11 @@ public class ArrayDemo {
 
         // team[3] = new Pokemon("Charizard");
         // {0, 1, 2, "Charizard", 4, 5}
-        
+
         // Size 6 list max index 5
         // Pokemon[] box = new Pokemon[30];
         // Pokemon[] box2 = new Pokemon[30];
-        
+
         int[] myFavoriteNumbers = new int[4];
 
         myFavoriteNumbers[0] = 4;
@@ -32,8 +32,8 @@ public class ArrayDemo {
         String[] beatles2 = new String[5];
         for (int i = 0; i < beatles2.length; i++) {
             if (beatles[i] != null) {
-            beatles2[i] = beatles[i];
-            System.out.println(beatles[i].length());
+                beatles2[i] = beatles[i];
+                System.out.println(beatles[i].length());
             } else {
                 System.out.println("This element is null");
             }
