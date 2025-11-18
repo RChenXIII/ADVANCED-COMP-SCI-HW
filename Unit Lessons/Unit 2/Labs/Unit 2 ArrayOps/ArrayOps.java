@@ -45,6 +45,7 @@ public class ArrayOps {
         }
 
         int max = array[0];
+        
         for (int i = 1; i < array.length; i++) {
             if (array[i] > max) {
                 max = array[i];
