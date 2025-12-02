@@ -94,8 +94,8 @@ public class Unit2Exercises {
     public static int countCode(String str) {
         int count = 0;
         for (int i = 0; i <= str.length() - 4; i++) {
-            if (str.substring(i, i + 2).equals("co") && 
-                str.substring(i + 3, i + 4).equals("e")) {
+            if (str.substring(i, i + 2).equals("co") 
+                && str.substring(i + 3, i + 4).equals("e")) {
                 count++;
             }
         }
@@ -158,14 +158,25 @@ public class Unit2Exercises {
     }
 
     public static int[] zeroFront(int[] nums) {
-        int[] result = Utils.copyArray(nums);
-        int insertPos = 0;
+        int[] result = new int[nums.length];
+        int zeroIndex = 0;
+        int nonZeroIndex = 0;
         
-        for (int i = 0; i < result.length; i++) {
-            if (result[i] == 0) {
-                result[i] = result[insertPos];
-                result[insertPos] = 0;
-                insertPos++;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                zeroIndex++;
+            }
+        }
+        
+        nonZeroIndex = zeroIndex;
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                result[zeroIndex - 1] = 0;
+                zeroIndex--;
+            } else {
+                result[nonZeroIndex] = nums[i];
+                nonZeroIndex++;
             }
         }
         
@@ -217,6 +228,9 @@ public class Unit2Exercises {
     }
 
     public static double divide(int a, int b) {
+        if (a == 0 || b == 0) {
+            return 0.0;
+        }
         int larger = Math.max(a, b);
         int smaller = Math.min(a, b);
         return (double) larger / smaller;
