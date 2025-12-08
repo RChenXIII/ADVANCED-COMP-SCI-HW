@@ -331,13 +331,4 @@ public class Utils {
     public static void printArray(String[] arr) {
         System.out.println(arrayToString(arr));
     }
-    
-    public static boolean isFull(String[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == null) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

@@ -165,7 +165,5 @@ public class LibraryTester {
         System.out.println("=== Testing calculateAverageForRating() - New Library ===");
         System.out.println("Rating index 0 average: " + newLib.calculateAverageForRating(0));
         System.out.println("Rating index 3 average: " + newLib.calculateAverageForRating(3));
-        String test = "HI GUYS";
-        System.out.println(test.toLowerCase());
     }
 }
