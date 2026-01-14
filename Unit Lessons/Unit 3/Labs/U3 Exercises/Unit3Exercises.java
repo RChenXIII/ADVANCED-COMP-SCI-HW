@@ -45,11 +45,12 @@ public class Unit3Exercises {
 
     // Task 4: Is Palindrome
     public static boolean isPalindrome(String str) {
+        String trim = str.trim();
         int left = 0;
-        int right = str.length() - 1;
+        int right = trim.length() - 1;
         while (left < right) {
-            char a = str.charAt(left);
-            char b = str.charAt(right); // Changed from str.charAt(right - 1)
+            char a = trim.charAt(left);
+            char b = trim.charAt(right); // Changed from str.charAt(right - 1)
             if (a != b) {
                 return false; // Changed from return left % 2 == 0
             }

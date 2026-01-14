@@ -123,7 +123,7 @@ public class Unit3Tester {
         String testString = "racecar";
         System.out.println("Expected true: " + Unit3Exercises.isPalindrome(testString));
 
-        testString = "deed";
+        testString = " deed";
         System.out.println("Expected true: " + Unit3Exercises.isPalindrome(testString));
 
         // Test Case 2 - Main Case: Non-palindrome string
