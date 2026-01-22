@@ -30,6 +30,9 @@ public class Unit4Exercises {
 
     public static int[] generateNumberSequence(int start, int end) {
         int size = end - start;
+        if (size < 0) {
+            size = 0;
+        }
         int[] result = new int[size];
         
         for (int i = 0; i < size; i++) {
@@ -72,7 +75,8 @@ public class Unit4Exercises {
         }
         
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] % 2 != 0) {
+            int remainder = nums[i] % 2;
+            if (remainder == 1 || remainder == -1) {
                 result[index] = nums[i];
                 index++;
             }

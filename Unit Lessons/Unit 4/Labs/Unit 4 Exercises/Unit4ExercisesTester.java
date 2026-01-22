@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Unit4Tester {
+public class Unit4ExercisesTester {
     
     public static void main(String[] args) {
         System.out.println("=== Testing Array Methods ===\n");
@@ -31,36 +31,49 @@ public class Unit4Tester {
     public static void testHasThreeConsecutive() {
         System.out.println("Testing hasThreeConsecutive:");
         
-        System.out.println("Expected true: " + Unit4Exercises.hasThreeConsecutive(new int[]{2, 1, 3, 5}));
-        System.out.println("Expected false: " + Unit4Exercises.hasThreeConsecutive(new int[]{2, 1, 2, 5}));
-        System.out.println("Expected true: " + Unit4Exercises.hasThreeConsecutive(new int[]{2, 4, 2, 5}));
+        System.out.println("Expected true: "
+            + Unit4Exercises.hasThreeConsecutive(new int[]{2, 1, 3, 5}));
+        System.out.println("Expected false: "
+            + Unit4Exercises.hasThreeConsecutive(new int[]{2, 1, 2, 5}));
+        System.out.println("Expected true: "
+            + Unit4Exercises.hasThreeConsecutive(new int[]{2, 4, 2, 5}));
         System.out.println();
     }
     
     public static void testGenerateNumberSequence() {
         System.out.println("Testing generateNumberSequence:");
         
-        System.out.println("Expected [5, 6, 7, 8, 9]: " + Arrays.toString(Unit4Exercises.generateNumberSequence(5, 10)));
-        System.out.println("Expected [11, 12, 13, 14, 15, 16, 17]: " + Arrays.toString(Unit4Exercises.generateNumberSequence(11, 18)));
-        System.out.println("Expected [1, 2]: " + Arrays.toString(Unit4Exercises.generateNumberSequence(1, 3)));
+        System.out.println("Expected [5, 6, 7, 8, 9]: "
+            + Arrays.toString(Unit4Exercises.generateNumberSequence(5, 10)));
+        System.out.println("Expected [11, 12, 13, 14, 15, 16, 17]: "
+            + Arrays.toString(Unit4Exercises.generateNumberSequence(11, 18)));
+        System.out.println("Expected [1, 2]: "
+            + Arrays.toString(Unit4Exercises.generateNumberSequence(1, 3)));
         System.out.println();
     }
     
     public static void testFizzBuzz() {
         System.out.println("Testing fizzBuzz:");
         
-        System.out.println("Expected [1, 2, Fizz, 4, Buzz]: " + Arrays.toString(Unit4Exercises.fizzBuzz(1, 6)));
-        System.out.println("Expected [1, 2, Fizz, 4, Buzz, Fizz, 7]: " + Arrays.toString(Unit4Exercises.fizzBuzz(1, 8)));
-        System.out.println("Expected [1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz]: " + Arrays.toString(Unit4Exercises.fizzBuzz(1, 11)));
+        System.out.println("Expected [1, 2, Fizz, 4, Buzz]: "
+            + Arrays.toString(Unit4Exercises.fizzBuzz(1, 6)));
+        System.out.println("Expected [1, 2, Fizz, 4, Buzz, Fizz, 7]: "
+            + Arrays.toString(Unit4Exercises.fizzBuzz(1, 8)));
+        System.out.println("Expected [1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz]: "
+            + Arrays.toString(Unit4Exercises.fizzBuzz(1, 11)));
         System.out.println();
     }
     
     public static void testMoveEvenBeforeOdd() {
         System.out.println("Testing moveEvenBeforeOdd:");
         
-        System.out.println("Expected [0, 0, 0, 1, 1, 1, 1]: " + Arrays.toString(Unit4Exercises.moveEvenBeforeOdd(new int[]{1, 0, 1, 0, 0, 1, 1})));
-        System.out.println("Expected [2, 3, 3]: " + Arrays.toString(Unit4Exercises.moveEvenBeforeOdd(new int[]{3, 3, 2})));
-        System.out.println("Expected [2, 2, 2]: " + Arrays.toString(Unit4Exercises.moveEvenBeforeOdd(new int[]{2, 2, 2})));
+        System.out.println("Expected [0, 0, 0, 1, 1, 1, 1]: "
+            + Arrays.toString(Unit4Exercises.moveEvenBeforeOdd(
+                new int[]{1, 0, 1, 0, 0, 1, 1})));
+        System.out.println("Expected [2, 3, 3]: "
+            + Arrays.toString(Unit4Exercises.moveEvenBeforeOdd(new int[]{3, 3, 2})));
+        System.out.println("Expected [2, 2, 2]: "
+            + Arrays.toString(Unit4Exercises.moveEvenBeforeOdd(new int[]{2, 2, 2})));
         System.out.println();
     }
     
