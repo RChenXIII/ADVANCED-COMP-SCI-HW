@@ -36,7 +36,7 @@ public class SkyView {
             throw new IllegalArgumentException("view must not be null");
         }
         this.view = view;
-    }
+    } 
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -81,6 +81,7 @@ public class SkyView {
         }
         return equals((SkyView) obj);
     }
+
 
     public double getAverage(int startRow, int endRow, int startCol, int endCol) {
         if (startRow < 0 || endRow < startRow || endRow >= view.length) {
