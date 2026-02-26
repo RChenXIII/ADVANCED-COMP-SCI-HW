@@ -107,7 +107,6 @@ public abstract class Animal {
         this.conservationStatus = conservationStatus;
     }
 
-    // Behaviors that each concrete animal will implement differently
     public abstract void makeSound();
 
     public abstract void move();

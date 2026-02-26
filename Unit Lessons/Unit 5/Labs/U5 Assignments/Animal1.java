@@ -1,4 +1,4 @@
-public abstract class Animal1 {
+public abstract class Animal1 extends Animal{
     protected String name;
     protected final String fact;
     protected final String behavior;
