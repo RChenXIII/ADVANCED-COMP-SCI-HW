@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Ostrich extends Animal implements Predator {
+public class Ostrich extends Animal implements Predator, Pettable {
     private int feedMeter;
     private double heightMeters;
     private int topSpeedKmph;
@@ -9,6 +9,8 @@ public class Ostrich extends Animal implements Predator {
     private int eggsLaid;
     private String primaryPrey;
     private double averagePreyMass;
+    private int friendlinessLevel;
+    private int energyLevel;
 
     private static final String[] FACTS = {
             "Ostriches are the fastest-running birds in the world, reaching speeds of 72 km/h.",
@@ -28,6 +30,8 @@ public class Ostrich extends Animal implements Predator {
         this.eggsLaid = 0;
         this.primaryPrey = "Small animals and insects";
         this.averagePreyMass = 0.5;
+        this.friendlinessLevel = 4;
+        this.energyLevel = 9;
     }
 
     public Ostrich(String name) {
@@ -41,6 +45,8 @@ public class Ostrich extends Animal implements Predator {
         this.eggsLaid = 0;
         this.primaryPrey = "Small animals and insects";
         this.averagePreyMass = 0.5;
+        this.friendlinessLevel = 4;
+        this.energyLevel = 9;
     }
 
     public int getFeedMeter() {
@@ -163,6 +169,33 @@ public class Ostrich extends Animal implements Predator {
         System.out.println(getName() + " swallows its prey whole in one gulp.");
     }
 
+    // Pettable interface methods
+    @Override
+    public int getFriendlinessLevel() {
+        return friendlinessLevel;
+    }
+
+    @Override
+    public int getEnergyLevel() {
+        return energyLevel;
+    }
+
+    @Override
+    public void greetHuman() {
+        System.out.println(getName() + " eyes the human cautiously but with curiosity.");
+    }
+
+    @Override
+    public void bePetted() {
+        System.out.println(getName() + " tolerates the touch and stamps its feet occasionally.");
+    }
+
+    @Override
+    public void playWithHuman() {
+        System.out.println(
+                getName() + " runs around the human at high speed in a challenging display!");
+    }
+
     public void layEgg() {
         eggsLaid++;
         System.out.println(getName() + " laid an egg. Total eggs laid: " + eggsLaid);
@@ -178,7 +211,8 @@ public class Ostrich extends Animal implements Predator {
         return "Ostrich: " + getName() + " (" + getScientificName() + ")\n" + "Habitat: "
                 + getHabitat() + "\n" + "Height: " + heightMeters + " m, Top speed: " + topSpeedKmph
                 + " km/h, Toes: " + toeCount + ", Feed meter: " + feedMeter + "%" + "\nAge: "
-                + ageYears + " years, Eggs laid: " + eggsLaid;
+                + ageYears + " years, Eggs laid: " + eggsLaid + "\nFriendliness: "
+                + friendlinessLevel + "/10, Energy: " + energyLevel + "/10";
     }
 }
 

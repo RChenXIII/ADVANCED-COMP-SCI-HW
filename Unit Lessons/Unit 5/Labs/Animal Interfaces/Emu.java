@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Emu extends Animal implements Pettable {
+public class Emu extends Animal implements Pettable, Swimmable {
     private double heightMeters;
     private int topSpeedKmph;
     private double wingSpanMeters;
@@ -9,6 +9,8 @@ public class Emu extends Animal implements Pettable {
     private int populationEstimate;
     private int friendlinessLevel;
     private int energyLevel;
+    private double swimSpeed;
+    private double preferredDepth;
 
     private static final String[] FACTS = {
             "Emus are the second-largest living bird by height after the ostrich.",
@@ -28,6 +30,8 @@ public class Emu extends Animal implements Pettable {
         this.populationEstimate = 8000000;
         this.friendlinessLevel = 6;
         this.energyLevel = 8;
+        this.swimSpeed = 8.0;
+        this.preferredDepth = 2.0;
     }
 
     public Emu(String name) {
@@ -41,6 +45,8 @@ public class Emu extends Animal implements Pettable {
         this.populationEstimate = 8000000;
         this.friendlinessLevel = 6;
         this.energyLevel = 8;
+        this.swimSpeed = 8.0;
+        this.preferredDepth = 2.0;
     }
 
     public double getHeightMeters() {
@@ -162,6 +168,33 @@ public class Emu extends Animal implements Pettable {
         System.out.println(getName() + " playfully runs in circles around the human!");
     }
 
+    // Swimmable interface methods
+    @Override
+    public double getSwimSpeed() {
+        return swimSpeed;
+    }
+
+    @Override
+    public double getPreferredDepth() {
+        return preferredDepth;
+    }
+
+    @Override
+    public void enterWater() {
+        System.out.println(getName() + " wades into the water with cautious steps.");
+    }
+
+    @Override
+    public void swim() {
+        System.out.println(getName() + " paddles through the water at " + swimSpeed
+                + " km/h with surprising grace.");
+    }
+
+    @Override
+    public void exitWater() {
+        System.out.println(getName() + " shakes off the water and hops back onto dry land.");
+    }
+
     public void ageOneYear() {
         ageYears++;
         System.out.println(getName() + " is now " + ageYears + " years old.");
@@ -173,6 +206,7 @@ public class Emu extends Animal implements Pettable {
                 + "\n" + "Height: " + heightMeters + " m, Top speed: " + topSpeedKmph
                 + " km/h, Wing span: " + wingSpanMeters + " m, Flight capable: " + canFly
                 + "\nAge: " + ageYears + " years, Population estimate: " + populationEstimate
-                + "\nFriendliness: " + friendlinessLevel + "/10, Energy: " + energyLevel + "/10";
+                + "\nFriendliness: " + friendlinessLevel + "/10, Energy: " + energyLevel + "/10"
+                + "\nSwim Speed: " + swimSpeed + " km/h, Preferred Depth: " + preferredDepth + " m";
     }
 }
