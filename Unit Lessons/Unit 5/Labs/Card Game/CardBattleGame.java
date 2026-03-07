@@ -41,6 +41,7 @@ public class CardBattleGame {
 
         // Main loop: continue until one player has nothing left
         while (player.hasAnythingLeft() && bot.hasAnythingLeft()) {
+            System.out.println("-- " + current.getName() + "'s turn --");
             drawAndPlayIfNeeded(current, other);
 
             if (!current.hasAnythingLeft())
@@ -68,20 +69,24 @@ public class CardBattleGame {
     public static void drawAndPlayIfNeeded(PlayerState self, PlayerState other) {
         while (self.getActive() == null && self.getDeck() != null && !self.getDeck().isEmpty()) {
             Card card = self.getDeck().remove(0);
+            System.out.println(self.getName() + " draws " + card.getName() + " " + card);
             self.setActive(card);
 
             // Apply on-play effects (shield / bonus damage)
             card.applySelfOnPlay();
+            System.out.println("  Played: " + card);
 
             // Apply any pending damage (from Ripple)
             int pending = self.getPendingDamage();
             if (pending > 0) {
+                System.out.println("  Pending damage " + pending + " applies to " + card.getName());
                 card.takeDamage(pending);
                 self.setPendingDamage(0);
             }
 
             // If the card died from pending damage, discard it and draw again
             if (card.isDefeated()) {
+                System.out.println("  " + card.getName() + " was defeated by pending damage");
                 self.setActive(null);
                 continue;
             }
@@ -89,9 +94,13 @@ public class CardBattleGame {
             // Apply ping damage to opponent
             int ping = card.getAbility().pingDamageOnPlay();
             if (ping > 0) {
+                System.out.println("  " + card.getName() + " pings for " + ping);
                 if (other.getActive() != null) {
                     other.getActive().takeDamage(ping);
+                    System.out.println("    " + other.getName() + "'s " + other.getActive().getName()
+                            + " takes " + ping + " ping dmg");
                     if (other.getActive().isDefeated()) {
+                        System.out.println("    " + other.getActive().getName() + " is defeated by ping");
                         other.setActive(null);
                     }
                 } else {
@@ -101,6 +110,7 @@ public class CardBattleGame {
 
             // If the card cycles, move it to the bottom and draw again
             if (card.getAbility().cyclesOnPlay()) {
+                System.out.println("  " + card.getName() + " cycles to bottom of deck");
                 self.getDeck().add(card);
                 self.setActive(null);
                 continue;
@@ -119,9 +129,13 @@ public class CardBattleGame {
             return;
 
         int dmg = a.computeDamageAgainst(d);
+        System.out.println(attacker.getName() + "'s " + a.getName() + " attacks " + defender.getName() + "'s "
+                + d.getName() + " for " + dmg);
         d.takeDamage(dmg);
+        System.out.println("  " + defender.getName() + "'s " + d.getName() + " now " + d);
 
         if (d.isDefeated()) {
+            System.out.println("  " + d.getName() + " is defeated in battle");
             defender.setActive(null);
         }
     }
