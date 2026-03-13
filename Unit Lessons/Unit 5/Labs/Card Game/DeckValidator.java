@@ -30,12 +30,10 @@ public class DeckValidator {
     public static boolean checkNoMoreThanThreeAbilityCards(ArrayList<Card> deck) {
         if (deck == null)
             return false;
-
         int count = 0;
-        for (Card card : deck) {
-            if (card != null && card.hasAbility()) {
+        for (Card c : deck) {
+            if (c != null && c.hasAbility())
                 count++;
-            }
         }
         return count <= 3;
     }
@@ -47,15 +45,14 @@ public class DeckValidator {
     public static boolean checkNoDuplicateAbilities(ArrayList<Card> deck) {
         if (deck == null)
             return false;
-
+        // we'll track which ability ids we've seen (except NONE)
         boolean seenBastion = false;
         boolean seenRipple = false;
         boolean seenCleave = false;
-
-        for (Card card : deck) {
-            if (card == null)
+        for (Card c : deck) {
+            if (c == null)
                 continue;
-            String id = card.getAbility().getId();
+            String id = c.getAbility().getId();
             switch (id) {
                 case "BASTION":
                     if (seenBastion)
@@ -73,7 +70,7 @@ public class DeckValidator {
                     seenCleave = true;
                     break;
                 default:
-                    // NONE or unknown counts as no-op
+                    // NONE or unknown, ignore
                     break;
             }
         }
@@ -85,15 +82,14 @@ public class DeckValidator {
     public static boolean checkStatsInRange(ArrayList<Card> deck) {
         if (deck == null)
             return false;
-
-        for (Card card : deck) {
-            if (card == null)
+        for (Card c : deck) {
+            if (c == null)
                 return false;
-            int str = card.getStrength();
-            int hp = card.getHealth();
-            if (str < 1 || str > 5 || hp < 1 || hp > 5)
+            int s = c.getStrength();
+            int h = c.getHealth();
+            if (s < 1 || s > 5 || h < 1 || h > 5)
                 return false;
-            if (str + hp > 6)
+            if (s + h > 6)
                 return false;
         }
         return true;
@@ -103,7 +99,9 @@ public class DeckValidator {
     // - deck has exactly 5 cards
     // - AND all checks above return true
     public static boolean isValidDeck(ArrayList<Card> deck) {
-        if (deck == null || deck.size() != 5)
+        if (deck == null)
+            return false;
+        if (deck.size() != 5)
             return false;
         return checkNoMoreThanThreeAbilityCards(deck) && checkNoDuplicateAbilities(deck)
                 && checkStatsInRange(deck);
@@ -118,11 +116,12 @@ public class DeckValidator {
     // or use the createCard() helper below.
     public static ArrayList<Card> buildDefaultDeck() {
         ArrayList<Card> deck = new ArrayList<>();
-        deck.add(createCard("Card1", CardType.GRANITE, 3, 3, AbilityLibrary.NONE));
-        deck.add(createCard("Card2", CardType.PARCHMENT, 3, 3, AbilityLibrary.NONE));
-        deck.add(createCard("Card3", CardType.BLADE, 3, 3, AbilityLibrary.NONE));
-        deck.add(createCard("Card4", CardType.GRANITE, 3, 3, AbilityLibrary.NONE));
-        deck.add(createCard("Card5", CardType.BLADE, 3, 3, AbilityLibrary.NONE));
+        // create a simple 5‑card default deck; all cards 3/3, no ability
+        deck.add(createCard("Default1", CardType.GRANITE, 3, 3, AbilityLibrary.NONE));
+        deck.add(createCard("Default2", CardType.PARCHMENT, 3, 3, AbilityLibrary.NONE));
+        deck.add(createCard("Default3", CardType.BLADE, 3, 3, AbilityLibrary.NONE));
+        deck.add(createCard("Default4", CardType.GRANITE, 3, 3, AbilityLibrary.NONE));
+        deck.add(createCard("Default5", CardType.BLADE, 3, 3, AbilityLibrary.NONE));
         return deck;
     }
 
@@ -137,83 +136,95 @@ public class DeckValidator {
     //
     // Then use createCard() to build the right subclass from the parsed type.
     public static ArrayList<Card> buildUserDeck(Scanner sc) {
-        ArrayList<Card> deck = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
-            String name;
-            CardType type;
-            int strength;
-            int health;
-            Ability ability;
+        while (true) {
+            ArrayList<Card> deck = new ArrayList<>();
 
-            System.out.println("Building card " + i + " of 5");
+            for (int i = 0; i < 5; i++) {
+                System.out.println("--- Building card #" + (i + 1) + " ---");
+                String name;
+                CardType type = null;
+                int strength = 0;
+                int health = 0;
+                Ability ability = null;
 
-            // Name
-            while (true) {
-                System.out.print("Name: ");
-                name = sc.nextLine().trim();
-                if (!name.isEmpty() && !name.contains(" "))
-                    break;
-                System.out.println("Please enter a single word name.");
-            }
+                // name
+                System.out.print("Enter name: ");
+                name = sc.next();
 
-            // Type
-            while (true) {
-                System.out.print("Type (granite/parchment/blade): ");
-                String input = sc.nextLine();
-                type = CardType.fromText(input);
-                if (type != null)
-                    break;
-                System.out.println("Invalid type. Please enter granite, parchment, or blade.");
-            }
-
-            // Strength + Health
-            while (true) {
-                System.out.print("Strength (1-5): ");
-                String strInput = sc.nextLine().trim();
-                System.out.print("Health (1-5): ");
-                String hpInput = sc.nextLine().trim();
-
-                try {
-                    strength = Integer.parseInt(strInput);
-                    health = Integer.parseInt(hpInput);
-                } catch (NumberFormatException e) {
-                    System.out.println("Strength and health must be integers.");
-                    continue;
+                // type
+                while (type == null) {
+                    System.out.print("Enter type (granite/parchment/blade): ");
+                    type = CardType.fromText(sc.next());
+                    if (type == null)
+                        System.out.println("  invalid type, try again");
                 }
 
-                if (strength < 1 || strength > 5 || health < 1 || health > 5) {
-                    System.out.println("Strength and health must be between 1 and 5.");
-                    continue;
-                }
+                // strength and health
+                while (true) {
+                    System.out.print("Enter strength (1-5): ");
+                    if (sc.hasNextInt()) {
+                        strength = sc.nextInt();
+                    } else {
+                        sc.next();
+                        System.out.println("  please enter a number");
+                        continue;
+                    }
 
-                if (strength + health > 6) {
-                    System.out.println("The sum of strength and health must be 6 or less.");
-                    continue;
-                }
+                    System.out.print("Enter health (1-5): ");
+                    if (sc.hasNextInt()) {
+                        health = sc.nextInt();
+                    } else {
+                        sc.next();
+                        System.out.println("  please enter a number");
+                        continue;
+                    }
 
-                break;
-            }
-
-            // Ability
-            while (true) {
-                System.out.print("Ability (bastion/ripple/cleave/none): ");
-                String abInput = sc.nextLine();
-                String normalized = abInput == null ? "" : abInput.trim().toLowerCase();
-                if (normalized.equals("bastion") || normalized.equals("b")
-                        || normalized.equals("ripple") || normalized.equals("r")
-                        || normalized.equals("cleave") || normalized.equals("c")
-                        || normalized.equals("none") || normalized.equals("n")) {
-                    ability = AbilityLibrary.fromText(normalized);
+                    if (strength < 1 || strength > 5 || health < 1 || health > 5) {
+                        System.out.println("  stats must each be 1..5");
+                        continue;
+                    }
+                    if (strength + health > 6) {
+                        System.out.println("  strength + health must be <= 6");
+                        continue;
+                    }
+                    
+                    
                     break;
                 }
-                System.out
-                        .println("Invalid ability. Please enter bastion, ripple, cleave, or none.");
+
+                // ability
+                while (true) {
+                    System.out.print("Enter ability (bastion/ripple/cleave/none): ");
+                    String rawAbility = sc.next();
+                    ability = AbilityLibrary.fromText(rawAbility);
+
+                    // fromText() returns NONE for invalid values, so we must
+                    // distinguish between a real "none" and an invalid input.
+                    String norm = rawAbility.trim().toLowerCase();
+                    if (ability == AbilityLibrary.NONE
+                            && !(norm.equals("none") || norm.equals("n"))) {
+                        System.out.println("  invalid ability, try again");
+                        continue;
+                    }
+                    break;
+                }
+
+                Card card = createCard(name, type, strength, health, ability);
+                deck.add(card);
             }
 
-            deck.add(createCard(name, type, strength, health, ability));
+            // Validate the full deck and re-prompt if invalid
+            if (isValidDeck(deck)) {
+                return deck;
+            }
+
+            System.out.println("\nDeck invalid:");
+            if (!checkNoMoreThanThreeAbilityCards(deck))
+                System.out.println(" - No more than 3 cards may have abilities.");
+            if (!checkNoDuplicateAbilities(deck))
+                System.out.println(" - No duplicate abilities allowed.");
+            System.out.println("Please rebuild your deck.\n");
         }
-
-        return deck;
     }
 
     // ----------------------------
