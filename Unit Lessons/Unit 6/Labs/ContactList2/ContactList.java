@@ -1,132 +1,111 @@
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
-public class ContactList extends AbstractList {
+public class ContactList extends AbstractList<Contact> {
 
-    // instance variable
-    private ArrayList<String> contactList;
+    private ArrayList<Contact> contactList;
 
-    // constructor
-    // to-do: initializes an empty contact list
     public ContactList() {
-        contactList = new ArrayList<String>();
+        contactList = new ArrayList<Contact>();
     }
 
-    // methods
-
-    // to-do: findInsertLocation(String name)
-    /**
-     * returns the location in the contact list where the name should go to keep the list
-     * alphabetized
-     */
-    private int findInsertLocation(String name) {
-        // Binary search implementation (Stretch Challenge)
-        int left = 0;
-        int right = contactList.size();
-
-        while (left < right) {
-            int mid = (left + right) / 2;
-            int comparison = name.compareTo(contactList.get(mid));
-
-            if (comparison < 0) {
-                right = mid;
-            } else if (comparison > 0) {
-                left = mid + 1;
-            } else {
-
-                return mid;
-            }
-        }
-
-        return left;
-    }
-
-    // to-do: add(String name)
-    /**
-     * adds a name to the contact list so that the list remains alphabetized, it prints out which
-     * name is being added, also the method prevents duplicate names from being added
-     */
-    public boolean add(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty");
-        }
-
-        int insertIndex = findInsertLocation(name);
-
-        if (insertIndex < contactList.size() && contactList.get(insertIndex).equals(name)) {
+    public boolean add(Contact contact) {
+        if (contact == null) {
             return false;
         }
 
-        System.out.println("+ Adding " + name);
-        contactList.add(insertIndex, name);
-        return true;
-    }
-
-    // to-do: add(ArrayList<String> names)
-    /* this method adds a list of names to the contact list */
-    public void add(ArrayList<String> names) {
-        if (names == null) {
-            throw new IllegalArgumentException("Names list cannot be null");
-        }
-
-        for (String name : names) {
-            add(name);
-        }
-    }
-
-    // to-do: remove(String name)
-    /** removes name from the contact list and keeps list alphabetized */
-    public boolean remove(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty");
-        }
-
-        for (int i = 0; i < contactList.size(); i++) {
-            if (contactList.get(i).equals(name)) {
-                System.out.println("- Removing " + name);
-                contactList.remove(i);
-                return true;
+        for (Contact c : contactList) {
+            if (c.equals(contact)) {
+                return false;
             }
         }
 
-        return false;
+        contactList.add(contact);
+        return true;
     }
 
-    // to-do: remove(ArrayList<String> names)
-    /* this method removes a list of names from the contact list */
-    public void remove(ArrayList<String> names) {
-        if (names == null) {
-            throw new IllegalArgumentException("Names list cannot be null");
+    public boolean remove(Contact contact) {
+        if (contact == null) {
+            return false;
         }
 
-        for (String name : names) {
-            remove(name);
+        return contactList.remove(contact);
+    }
+
+    public void sortByFirstName() {
+        Collections.sort(contactList);
+    }
+
+    public void sortByLastName() {
+        for (int i = 0; i < contactList.size() - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < contactList.size(); j++) {
+                Contact current = contactList.get(j);
+                Contact min = contactList.get(minIndex);
+                if (current.compareByLastName(min) < 0) {
+                    minIndex = j;
+                }
+            }
+            Contact temp = contactList.get(i);
+            contactList.set(i, contactList.get(minIndex));
+            contactList.set(minIndex, temp);
         }
     }
 
-    /** returns a String containing all of the words in list */
+    public void sortByTelephoneNumber() {
+        for (int i = 1; i < contactList.size(); i++) {
+            Contact current = contactList.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && contactList.get(j).getTelephoneNumber()
+                    .compareTo(current.getTelephoneNumber()) > 0) {
+                contactList.set(j + 1, contactList.get(j));
+                j--;
+            }
+            contactList.set(j + 1, current);
+        }
+    }
+
+    public Contact searchContacts(String telephoneNumber) {
+        if (telephoneNumber == null || telephoneNumber.isEmpty()) {
+            throw new IllegalArgumentException("Phone number cannot be null");
+        }
+
+        sortByTelephoneNumber();
+
+        int left = 0;
+        int right = contactList.size() - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            Contact midContact = contactList.get(mid);
+            int comparison = midContact.getTelephoneNumber().compareTo(telephoneNumber);
+
+            if (comparison == 0) {
+                return midContact;
+            } else if (comparison < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return null;
+    }
+
     public String toString() {
         return "Contact List: " + contactList.toString();
     }
 
-    // to-do: get(int index)
-    /** returns the name at the specified index */
-    public String get(int index) {
+    @Override
+    public Contact get(int index) {
         return contactList.get(index);
     }
 
-    // to-do: size()
-    /** returns the number of names in the contact list */
+    @Override
     public int size() {
         return contactList.size();
     }
-
-    // to-do: clear()
-    /** removes all names from the contact list */
-    public void clear() {
-        System.out.println("Clearing the contact list");
-        contactList.clear();
-    }
-
 }
